@@ -9,10 +9,10 @@ const allUsers = (req,res,next) => {
         if(name){
             const user = users.filter(user => user.name.toLowerCase() === name.toLowerCase())
 
-            if(user){
-                return res.status(200).json(user)
-            }else{
+            if(user.length === 0){
                 return res.status(404).json({message:"User not found"})
+            }else{
+                return res.status(200).json(user)
             }
 
         }

@@ -1,6 +1,7 @@
 import express from 'express'
 import usersRouter from './routes/users.js'
 import tasksRouter from './routes/tasks.js'
+import { globalErrorHandler, notFoundErrorHandler } from './middleware/errorHandler.js'
 const app = express()
 const PORT = process.env.PORT || 5000
 
@@ -14,7 +15,8 @@ app.use('/api/tasks',tasksRouter)
 
 
 
-
+app.use(notFoundErrorHandler)
+app.use(globalErrorHandler)
 
 app.listen(PORT,() => {
     console.log(`Server is runing on ${PORT}`)
