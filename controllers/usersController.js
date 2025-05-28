@@ -24,4 +24,23 @@ const allUsers = (req,res,next) => {
     }
 }
 
-export {allUsers}
+//add user
+const addUser = (req,res,next) => {
+    try {
+        const {name,email} = req.body
+
+        if(!name || !email){
+            return res.status(400).json({message:"name and email are required."})
+        }
+        const newUser = {
+            id:users.length + 1,
+            name,
+            email
+        }
+        users.push(newUser)
+        res.status(201).json(newUser)
+    } catch (error) {
+        next(error)
+    }
+}
+export {allUsers,addUser}
